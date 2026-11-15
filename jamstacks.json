@@ -1,0 +1,19 @@
+{
+  "name": "Minimal portfolio",
+  "description": "A minimal portfolio for independent developers, designers and consultants, with selected work and a Jamstacks contact component.",
+  "tech": "next",
+  "type": "portfolio",
+  "style": "minimal",
+  "internal": false,
+  "components": [
+    "support-form"
+  ],
+  "configFile": "site.config.json",
+  "screenshots": {
+    "light": "screenshots/home-light.jpg",
+    "dark": "screenshots/home-dark.jpg",
+    "theme": {
+      "strategy": "media"
+    }
+  }
+}
