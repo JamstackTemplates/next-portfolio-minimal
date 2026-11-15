@@ -54,8 +54,19 @@ test('the GitHub Pages URL wins over the configured domain for canonical URLs', 
   });
   assert.equal(site.siteUrl, 'https://owner.github.io/portfolio');
   assert.equal(resolveSiteConfig(file, { NEXT_PUBLIC_SITE_DOMAIN: 'example.com', PAGES_BASE_PATH: '/p' }).siteUrl, 'https://example.com/p');
-  for (const url of ['http://owner.github.io/x', 'https://u:p@owner.github.io', 'https://owner.github.io/?q=1', 'not a url']) {
+  for (const url of ['ftp://owner.github.io/x', 'javascript:alert(1)', 'https://u:p@owner.github.io', 'https://owner.github.io/?q=1', 'https://owner.github.io/#fragment', 'not a url']) {
     assert.throws(() => resolveSiteConfig(file, { PAGES_BASE_URL: url }));
+  }
+});
+
+test('new Pages domains build before HTTPS enforcement while emitting HTTPS canonical URLs', () => {
+  for (const [reported, expected, basePath] of [
+    ['http://next-portfolio-minimal.jamstacks.net', 'https://next-portfolio-minimal.jamstacks.net', ''],
+    ['http://owner.github.io/portfolio/', 'https://owner.github.io/portfolio', '/portfolio'],
+  ]) {
+    const site = resolveSiteConfig(file, { GITHUB_ACTIONS: 'true', PAGES_BASE_URL: reported, PAGES_BASE_PATH: basePath });
+    assert.equal(site.siteUrl, expected);
+    assert.equal(site.basePath, basePath);
   }
 });
 
