@@ -71,3 +71,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Template publishing assets
+
+- `jamstacks/` contains optional source-template metadata, gallery captures and their checks.
+- Read `jamstacks/config.json`; capture evidence is `jamstacks/screenshots.json` and JPEGs stay directly inside `jamstacks/`.
+- Run `node --test jamstacks/config.test.mjs` only when maintaining a source template.
+- Customer websites can remove this entire folder. Normal tests, website code, builds and the Pages workflow must not import it.
+- Keep `site.config.json`, embed integration and the Pages workflow outside the optional folder.

@@ -160,7 +160,7 @@ public/               images and social preview
 scripts/serve.mjs     static preview server (with base path support)
 tests/                node:test suites
 site.config.json      public deployment settings (provisioner-compatible)
-jamstacks.json  Jamstacks gallery manifest
+jamstacks/            optional template publishing metadata and gallery captures
 ```
 
 ## Before publishing your website
@@ -172,3 +172,21 @@ jamstacks.json  Jamstacks gallery manifest
 - If you connect Jamstacks, publish the form in the portal and verify a real test message reaches the website inbox. A successful build does not verify message delivery.
 
 `AGENTS.md` gives coding assistants the same portable architecture and editing guidance.
+
+## Optional template publishing folder
+
+`jamstacks/` is used only to publish this source template in the Jamstacks gallery:
+
+```text
+jamstacks/config.json       template metadata and screenshot paths
+jamstacks/screenshots.json  capture viewport, hashes and sizes
+jamstacks/home-light.jpg    light homepage preview
+jamstacks/home-dark.jpg     dark homepage preview
+jamstacks/config.test.mjs   source-template publishing checks
+```
+
+Run `node --test jamstacks/config.test.mjs` when maintaining the source template.
+When creating a customer website, the whole `jamstacks/` folder can be removed.
+Normal `npm test`, type checking, builds and the Pages workflow do not depend on it.
+Keep `site.config.json`, the website's embed integration and `.github/workflows/pages.yml`;
+these belong to the customer website and continue to work without gallery metadata.

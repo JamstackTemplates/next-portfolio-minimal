@@ -109,18 +109,6 @@ test('Pages base paths support root, repository and nested paths without URL inj
   }
 });
 
-test('the gallery manifest matches the service catalog contract', () => {
-  const manifest = JSON.parse(readFileSync(new URL('../jamstacks.json', import.meta.url), 'utf8'));
-  assert.deepEqual([manifest.tech, manifest.type, manifest.style], ['next', 'portfolio', 'minimal']);
-  assert.equal(manifest.internal, false);
-  assert.equal(manifest.configFile, 'site.config.json');
-  assert.ok(manifest.components.includes('support-form'));
-  for (const key of ['name', 'description', 'tech', 'type', 'style']) {
-    assert.ok(typeof manifest[key] === 'string' && manifest[key].length > 0 && !/[\u0000-\u001f]/.test(manifest[key]), key);
-  }
-  assert.ok(manifest.name.length <= 100 && manifest.description.length <= 500);
-});
-
 test('the workflow keeps the provisioning dispatch contract', () => {
   const workflow = readFileSync(new URL('../.github/workflows/pages.yml', import.meta.url), 'utf8');
   assert.match(workflow, /run-name: \$\{\{ inputs\.provisioning_id && format\('Jamstacks \{0\}', inputs\.provisioning_id\)/);
