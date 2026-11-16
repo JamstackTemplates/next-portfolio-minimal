@@ -20,7 +20,10 @@ export function SiteFooter() {
             <li key={link.url}><a href={link.url} rel="me noopener">{link.label}</a></li>
           ))}
         </ul>
-        <p className="site-footer__meta">© {year} {profile.name}</p>
+        <p className="site-footer__meta">
+          <span>© {year} {profile.name}</span>
+          <span className="credit">Made with <a href="https://jamstacks.net">Jamstacks</a> · Static website. Dynamic components.</span>
+        </p>
       </div>
     </footer>
   );
