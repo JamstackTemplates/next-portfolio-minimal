@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
+import { ThemeProvider } from 'jamstacks';
+import { ThemeScript } from 'jamstacks/server';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 import { profile } from '../content/profile';
@@ -35,12 +37,15 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head><ThemeScript /></head>
       <body>
-        <a className="skip-link" href="#main">Skip to content</a>
-        <SiteHeader />
-        <main id="main" tabIndex={-1}>{children}</main>
-        <SiteFooter />
+        <ThemeProvider>
+          <a className="skip-link" href="#main">Skip to content</a>
+          <SiteHeader />
+          <main id="main" tabIndex={-1}>{children}</main>
+          <SiteFooter />
+        </ThemeProvider>
       </body>
     </html>
   );

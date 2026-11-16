@@ -52,6 +52,12 @@ Notes:
 - Don't present invented testimonials, client logos or metrics as fact. Write about what you actually did.
 - Text is rendered as plain text, never HTML.
 
+## Appearance
+
+The header uses `DarkModeToggle` from the published `jamstacks` React package. The root layout supplies `ThemeProvider` and the early `ThemeScript`, so a saved preference applies before the first paint and stays consistent across navigation and tabs. No component stylesheet is needed; the template's page palette and form fallbacks remain in `app/globals.css`.
+
+The default follows the device. Switching saves an explicit light/dark choice in this origin's `color-scheme` localStorage key. To follow the device again, remove that key and reload. Without JavaScript, the page still follows the device using its media-query palette.
+
 ## Configuration
 
 `site.config.json` holds public deployment settings only. Jamstacks may rewrite this file when it sets up a repository for you; it never touches `content/`.

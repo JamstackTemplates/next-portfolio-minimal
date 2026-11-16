@@ -8,12 +8,15 @@
     "build": "next build",
     "start": "node scripts/serve.mjs",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "node --test tests/*.test.mjs tests/*.test.ts"
+    "test": "node --test tests/*.test.mjs tests/*.test.ts",
+    "outdated": "vp outdated",
+    "upgrade": "npx npm-check-updates@latest -u --reject vite,vite-plus,@vitest/ui && npm install"
   },
   "engines": {
     "node": ">=24"
   },
   "dependencies": {
+    "jamstacks": "^0.1.2",
     "next": "16.4.3",
     "react": "19.3.1",
     "react-dom": "19.3.1"
