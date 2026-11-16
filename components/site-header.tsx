@@ -10,17 +10,20 @@ const navigation = [
 
 export function SiteHeader() {
   return (
-    <header className="site-header">
-      <div className="wrap site-header__inner">
-        <SiteLink href="/" className="site-header__name">
+    <header>
+      <div className="wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-2 py-5 xs:py-7">
+        <SiteLink href="/" className="py-1.5 font-serif text-xl no-underline after:text-accent after:content-['.']">
           {profile.name}
         </SiteLink>
-        <div className="site-header__actions">
+        <div className="ml-auto flex items-center gap-6 print:hidden">
           <nav aria-label="Main">
-            <ul className="site-nav">
+            <ul className="flex gap-x-5 gap-y-1 xs:gap-x-7">
               {navigation.map(item => (
                 <li key={item.href}>
-                  <SiteLink href={item.href} markCurrent="section">{item.label}</SiteLink>
+                  <SiteLink href={item.href} markCurrent="section"
+                    className="inline-block border-b-2 border-transparent py-2 text-muted no-underline transition-colors hover:text-accent aria-[current]:border-accent aria-[current]:text-ink">
+                    {item.label}
+                  </SiteLink>
                 </li>
               ))}
             </ul>

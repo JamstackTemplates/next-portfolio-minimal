@@ -41,7 +41,7 @@ Edit these files — every page reads from them, so there are no duplicated stri
 | `public/images/` | Project images. Reference them in `projects.ts` as `/images/...` with their real width and height |
 | `public/og.png` | 1200×630 social preview image |
 | `app/icon.svg` | Browser tab icon |
-| [app/globals.css](app/globals.css) | Colours, fonts and spacing are tokens at the top of the file |
+| [app/tailwind.input.css](app/tailwind.input.css) | Colours, fonts and other customizations. Components are styled with Tailwind classes |
 | [site.config.json](site.config.json) | Site name/description and public deployment settings (see below) |
 
 Notes:
@@ -54,7 +54,9 @@ Notes:
 
 ## Appearance
 
-The header uses `DarkModeToggle` from the published `jamstacks` React package. The root layout supplies `ThemeProvider` and the early `ThemeScript`, so a saved preference applies before the first paint and stays consistent across navigation and tabs. No component stylesheet is needed; the template's page palette and form fallbacks remain in `app/globals.css`.
+The header uses `DarkModeToggle` from the published `jamstacks` React package. The root layout supplies `ThemeProvider` and the early `ThemeScript`, so a saved preference applies before the first paint and stays consistent across navigation and tabs. No component stylesheet is needed; the template's page palette and form fallbacks live in `app/tailwind.input.css`.
+
+Styling uses [Tailwind CSS v4](https://tailwindcss.com). Components use utility classes such as `bg-surface text-ink`, built from the template's own colour tokens; Tailwind's default palette is switched off so the look stays consistent. To change a colour, edit its variable in `app/tailwind.input.css` (light `:root` and both dark blocks). To add one, such as a custom accent, add a variable there and map it in `@theme inline` (`--color-highlight: var(--highlight)` gives `bg-highlight`, `text-highlight` and so on).
 
 The default follows the device. Switching saves an explicit light/dark choice in this origin's `color-scheme` localStorage key. To follow the device again, remove that key and reload. Without JavaScript, the page still follows the device using its media-query palette.
 
@@ -110,7 +112,7 @@ How it behaves:
 
 **Why Contact uses full page loads:** the current shared runtime finds the form's host when its script runs and stops watching for new hosts after ten seconds; it has no public "remount" API. Links to and from Contact therefore do an ordinary full page load (all other links use fast client-side navigation), so the form appears reliably however long a visitor browses first and however many times they return. This is handled by [components/site-link.tsx](components/site-link.tsx).
 
-**Styling:** the page maps its design tokens to the shared `--jamstacks-*` CSS variables (font, colours, border, radius, control height, spacing and `--jamstacks-form-max-width`) at the top of [app/globals.css](app/globals.css). A theme you publish in the portal overrides these on the component itself. Don't style the component's internals; they're owned by the runtime.
+**Styling:** the page maps its design tokens to the shared `--jamstacks-*` CSS variables (font, colours, border, radius, control height, spacing and `--jamstacks-form-max-width`) in [app/tailwind.input.css](app/tailwind.input.css). A theme you publish in the portal overrides these on the component itself. Don't style the component's internals; they're owned by the runtime.
 
 **Content Security Policy:** none is set by this template. If you add one, allow scripts from your Jamstacks CDN origin (e.g. `https://cdn.jamstacks.net`), the spam-check provider used by the form (`https://challenges.cloudflare.com` for scripts and frames), and `connect-src` to the API origin your published form uses. Avoid wildcards and `unsafe-eval`.
 

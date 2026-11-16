@@ -6,7 +6,7 @@ import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 import { profile } from '../content/profile';
 import { site } from '../lib/site';
-import './globals.css';
+import './tailwind.input.css';
 
 // Absolute URLs only when the deployed URL is known at build time. Never fall back to localhost.
 const socialImage = site.url ? [{ url: `${site.url}/og.png`, width: 1200, height: 630, alt: `${profile.name} — ${profile.role}` }] : undefined;
@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head><ThemeScript /></head>
       <body>
         <ThemeProvider>
-          <a className="skip-link" href="#main">Skip to content</a>
+          <a className="absolute -top-16 left-4 z-10 rounded-ui bg-ink px-4 py-2.5 text-bg no-underline focus:top-4" href="#main">Skip to content</a>
           <SiteHeader />
           <main id="main" tabIndex={-1}>{children}</main>
           <SiteFooter />

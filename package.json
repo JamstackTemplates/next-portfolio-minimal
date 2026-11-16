@@ -9,6 +9,7 @@
     "start": "node scripts/serve.mjs",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "node --test tests/*.test.mjs tests/*.test.ts",
+    "check": "npm test && npm run typecheck && npm run build",
     "outdated": "vp outdated",
     "upgrade": "npx npm-check-updates@latest -u --reject vite,vite-plus,@vitest/ui && npm install"
   },
@@ -16,10 +17,13 @@
     "node": ">=24"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "4.3.5",
     "jamstacks": "^0.1.2",
     "next": "16.4.3",
+    "postcss": "8.5.6",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "tailwindcss": "4.3.5"
   },
   "devDependencies": {
     "@types/node": "24.19.2",

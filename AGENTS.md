@@ -16,9 +16,23 @@ content editing, deployment and the optional Jamstacks contact form.
 - `content/projects.ts` owns project cards and statically generated case studies. Owners
   can add or remove projects; keep slugs unique and URL-safe.
 - `public/` holds local images and downloadable assets. Keep image dimensions and alt text accurate.
-- `app/globals.css` owns the design tokens. Preserve readable typography, responsive layouts,
-  visible keyboard focus, semantic headings and reduced-motion support.
+- Colours, fonts and spacing are tokens in `app/tailwind.input.css` (see Styling).
 - Keep content separate from `site.config.json`: Jamstacks may rewrite deployment fields there.
+
+## Styling (Tailwind CSS v4)
+
+- Style components with Tailwind utility classes in the TSX. Don't add global CSS for one-off styles.
+- `app/tailwind.input.css` holds everything utilities can't express: the colour tokens (`:root` for light,
+  plus two dark blocks that must stay identical), the `@theme` built from them, base element styles,
+  shared building blocks (`.button`, `.button-quiet`, `.text-link`, `.eyebrow`, `.section-title`, `.prose`, `.tag-list`, `.framed`), animation, and styles driven by data attributes.
+- Only this template's palette exists (`bg`, `surface`, `ink`, `muted`, `line`, `accent`, `accent-2`, `panel`, `success` and their variants). Tailwind's default colours are switched off. To add a
+  colour, such as a custom accent, add a variable to `:root` and both dark blocks, then map it in
+  `@theme inline` as `--color-name: var(--variable)` to get `bg-name`, `text-name` and so on.
+- Colours switch with the theme through the tokens, so prefer them to `dark:` variants (`dark:` follows `html.dark`).
+- Reuse the building blocks and existing components (e.g. `PageHead`) instead of restyling each instance.
+  Add a reusable layout helper with `@utility`.
+- Keep the `--jamstacks-*` component variables mapped to the tokens. Preserve readable contrast in both
+  themes, responsive layouts from 360px, visible keyboard focus, semantic headings and reduced-motion support.
 
 ## Static architecture
 
