@@ -17,7 +17,7 @@ export function generateStaticParams() {
 type Props = { params: Promise<{ slug: string }> };
 
 const caseSection = 'grid gap-x-12 gap-y-4 md:grid-cols-[minmax(10rem,1fr)_3fr]';
-const caseHeading = 'pt-1 font-mono text-[.8125rem] font-medium tracking-[.02em] text-accent';
+const caseHeading = 'section-title pt-1';
 const caption = 'mt-3.5 text-[.9375rem] text-muted';
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -49,10 +49,10 @@ export default async function ProjectPage({ params }: Props) {
         eyebrow={<SiteLink href="/work/" className="text-muted no-underline before:content-['←_'] hover:text-accent">Work</SiteLink>}
         title={project.title}
         after={
-          <dl className="mt-11 grid gap-x-8 gap-y-5 border-t border-line pt-6 xs:grid-cols-2 md:grid-cols-4">
+          <dl className="mt-11 grid gap-x-8 gap-y-5 border-t-2 border-ink pt-5 xs:grid-cols-2 md:grid-cols-4">
             {[['Client', project.client], ['Role', project.role], ['Team', project.team], ['Year', `${project.year} · ${project.duration}`]].map(([term, value]) => (
               <div key={term}>
-                <dt className="mb-1.5 font-mono text-[.8125rem] text-accent-2">{term}</dt>
+                <dt className="mb-1 text-[.875rem] font-semibold text-muted">{term}</dt>
                 <dd className="text-[.9875rem] leading-normal">{value}</dd>
               </div>
             ))}
@@ -116,9 +116,9 @@ export default async function ProjectPage({ params }: Props) {
 
       <nav className="wrap mt-(--space-section) grid gap-8" aria-label="More work">
         {next ? (
-          <SiteLink href={projectRoute(next.slug)} className="group grid gap-1 border-y border-line py-[clamp(1.75rem,4vw,3rem)] no-underline">
-            <span className="eyebrow mb-2 before:hidden">Next project</span>
-            <span className="font-serif text-[clamp(1.9rem,4vw,3rem)] leading-[1.15] group-hover:text-accent">{next.title}</span>
+          <SiteLink href={projectRoute(next.slug)} className="group grid gap-2 border-t-2 border-ink pt-6 pb-[clamp(1.75rem,4vw,3rem)] border-b border-b-line no-underline">
+            <span className="eyebrow mb-2">Next project</span>
+            <span className="display text-[clamp(2.1rem,5vw,3.75rem)] decoration-accent decoration-[3px] underline-offset-[.12em] group-hover:underline">{next.title}</span>
             <span className="text-muted">{next.summary}</span>
           </SiteLink>
         ) : null}

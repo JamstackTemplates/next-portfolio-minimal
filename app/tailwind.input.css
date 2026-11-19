@@ -1,4 +1,6 @@
-/* Minimal portfolio styles: Tailwind CSS v4 plus this template's customizations.
+/* Portfolio styles: Tailwind CSS v4 plus this template's customizations.
+   Visual idea: editorial and print-trained. Cool paper, navy ink, cobalt and a marker-yellow highlight,
+   one grotesk typeface set large, and heavy ink rules to structure each page.
    Components use Tailwind utility classes; this file holds what utilities can't:
    1. colour tokens for light/dark   2. the Tailwind theme built from them
    3. base element styles           4. shared building blocks (.button, .prose, ...)
@@ -14,26 +16,27 @@
    utilities like `bg-surface text-ink` and never need `dark:` variants.
    ------------------------------------------------------------------ */
 :root {
-  --bg: #f6f3ee;
-  --surface: #fffdf9;
-  --text: #1d1c1a;
-  --muted: #5d5850;
-  --line: #ddd6ca;
-  --accent: #b63d12;
-  --accent-strong: #93300c;
-  --accent-soft: #f6d9c8;
-  --accent-2: #1d6b5c;
-  --accent-2-soft: #d3e7e0;
+  --bg: #f3f4f0;
+  --surface: #fbfbf8;
+  --text: #16213a;
+  --muted: #4d586e;
+  --line: #d3d8e0;
+  --accent: #2c46e8;
+  --accent-strong: #1d31b5;
+  --accent-soft: #e2e6ff;
+  --accent-2: #7a5600;
+  --accent-2-soft: #fbedb4;
+  --marker: #f4d03f;
+  --on-marker: #16213a;
   --on-accent: #ffffff;
-  --danger: #a12622;
-  --success: #2f6b3a;
-  --focus: #b63d12;
-  --ink-panel: #1d1c1a;
-  --on-ink-panel: #f6f3ee;
-  --glow-1: rgba(232, 128, 74, .30);
-  --glow-2: rgba(42, 140, 120, .20);
-  --elev-1: 0 1px 2px rgba(40, 28, 18, .06), 0 2px 6px rgba(40, 28, 18, .05);
-  --elev-2: 0 2px 4px rgba(40, 28, 18, .05), 0 18px 40px -12px rgba(60, 32, 14, .22);
+  --danger: #b3261e;
+  --success: #1f7a4d;
+  --focus: #2c46e8;
+  --ink-panel: #16213a;
+  --on-ink-panel: #eef1f8;
+  --crop: color-mix(in srgb, var(--text) 42%, transparent);
+  --elev-1: 0 1px 2px rgba(22, 33, 58, .06), 0 2px 8px rgba(22, 33, 58, .05);
+  --elev-2: 0 1px 2px rgba(22, 33, 58, .08), 0 24px 48px -20px rgba(22, 33, 58, .28);
 
   --measure: 40rem;
   --page: 72rem;
@@ -68,55 +71,57 @@
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
     color-scheme: dark;
-    --bg: #181715;
-    --surface: #211f1c;
-    --text: #ece8e1;
-    --muted: #b3ab9f;
-    --line: #3a3631;
-    --accent: #f3895a;
-    --accent-strong: #f8a57f;
-    --accent-soft: #3d2519;
-    --accent-2: #6fd0bb;
-    --accent-2-soft: #173a33;
-    --on-accent: #1a1310;
+    --bg: #0c1322;
+    --surface: #131c31;
+    --text: #e8ecf5;
+    --muted: #a0aac0;
+    --line: #27324c;
+    --accent: #93a3ff;
+    --accent-strong: #b8c3ff;
+    --accent-soft: #1d2759;
+    --accent-2: #f4d03f;
+    --accent-2-soft: #352d10;
+    --marker: #f4d03f;
+    --on-marker: #16213a;
+    --on-accent: #0c1322;
     --danger: #ff9b8f;
-    --success: #8fd19b;
-    --focus: #f3895a;
-    --ink-panel: #2a1a12;
-    --on-ink-panel: #f6ede4;
-    --glow-1: rgba(243, 137, 90, .20);
-    --glow-2: rgba(111, 208, 187, .12);
-    --elev-1: 0 1px 2px rgba(0, 0, 0, .3);
-    --elev-2: 0 2px 4px rgba(0, 0, 0, .25), 0 22px 44px -14px rgba(0, 0, 0, .6);
+    --success: #6fd6a0;
+    --focus: #93a3ff;
+    --ink-panel: #1a2648;
+    --on-ink-panel: #eef1f8;
+    --crop: color-mix(in srgb, var(--text) 38%, transparent);
+    --elev-1: 0 1px 2px rgba(0, 0, 0, .35);
+    --elev-2: 0 1px 2px rgba(0, 0, 0, .3), 0 26px 50px -18px rgba(0, 0, 0, .7);
     /* The hosted form draws white button text, so its primary stays dark enough to read. */
-    --jamstacks-color-primary: #b0502a;
+    --jamstacks-color-primary: #3550f0;
   }
 }
 
 :root.dark {
   color-scheme: dark;
-  --bg: #181715;
-  --surface: #211f1c;
-  --text: #ece8e1;
-  --muted: #b3ab9f;
-  --line: #3a3631;
-  --accent: #f3895a;
-  --accent-strong: #f8a57f;
-  --accent-soft: #3d2519;
-  --accent-2: #6fd0bb;
-  --accent-2-soft: #173a33;
-  --on-accent: #1a1310;
+  --bg: #0c1322;
+  --surface: #131c31;
+  --text: #e8ecf5;
+  --muted: #a0aac0;
+  --line: #27324c;
+  --accent: #93a3ff;
+  --accent-strong: #b8c3ff;
+  --accent-soft: #1d2759;
+  --accent-2: #f4d03f;
+  --accent-2-soft: #352d10;
+  --marker: #f4d03f;
+  --on-marker: #16213a;
+  --on-accent: #0c1322;
   --danger: #ff9b8f;
-  --success: #8fd19b;
-  --focus: #f3895a;
-  --ink-panel: #2a1a12;
-  --on-ink-panel: #f6ede4;
-  --glow-1: rgba(243, 137, 90, .20);
-  --glow-2: rgba(111, 208, 187, .12);
-  --elev-1: 0 1px 2px rgba(0, 0, 0, .3);
-  --elev-2: 0 2px 4px rgba(0, 0, 0, .25), 0 22px 44px -14px rgba(0, 0, 0, .6);
+  --success: #6fd6a0;
+  --focus: #93a3ff;
+  --ink-panel: #1a2648;
+  --on-ink-panel: #eef1f8;
+  --crop: color-mix(in srgb, var(--text) 38%, transparent);
+  --elev-1: 0 1px 2px rgba(0, 0, 0, .35);
+  --elev-2: 0 1px 2px rgba(0, 0, 0, .3), 0 26px 50px -18px rgba(0, 0, 0, .7);
   /* The hosted form draws white button text, so its primary stays dark enough to read. */
-  --jamstacks-color-primary: #b0502a;
+  --jamstacks-color-primary: #3550f0;
 }
 
 /* ------------------------------------------------------------------
@@ -133,11 +138,11 @@
 }
 
 @theme static {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  /* --font-grotesk is self-hosted by next/font in app/layout.tsx; the rest is the fallback stack. */
+  --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, Consolas, monospace;
-  --radius-ui: 6px;
-  --radius-card: 14px;
+  --radius-ui: 8px;
+  --radius-card: 12px;
 }
 
 @theme inline {
@@ -152,6 +157,8 @@
   --color-accent-soft: var(--accent-soft);
   --color-accent-2: var(--accent-2);
   --color-accent-2-soft: var(--accent-2-soft);
+  --color-marker: var(--marker);
+  --color-on-marker: var(--on-marker);
   --color-on-accent: var(--on-accent);
   --color-success: var(--success);
   --color-panel: var(--ink-panel);
@@ -173,6 +180,13 @@
 @utility section-top {
   padding-top: var(--space-section);
 }
+/* Display type: the grotesk set large, heavy and tight. Size it with a text-[…] utility. */
+@utility display {
+  font-weight: 700;
+  line-height: .98;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
 
 /* ------------------------------------------------------------------
    3. Base elements
@@ -180,14 +194,10 @@
 @layer base {
   html { text-size-adjust: 100%; scroll-padding-top: 1.5rem; }
   body {
-    /* Warm and cool glows give the top of every page some depth. */
-    background:
-      radial-gradient(52rem 34rem at 92% -6rem, var(--glow-1), transparent 70%),
-      radial-gradient(44rem 30rem at -8% 14rem, var(--glow-2), transparent 70%),
-      var(--bg);
-    background-repeat: no-repeat;
+    background: var(--bg);
     color: var(--text);
-    font: 400 1.0625rem/1.65 var(--font-sans);
+    font: 400 1.0625rem/1.6 var(--font-sans);
+    font-feature-settings: "ss01";
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     display: flex;
@@ -196,10 +206,10 @@
   }
   main { flex: 1; outline: none; }
   img { height: auto; }
-  h1, h2, h3 { font-weight: 500; line-height: 1.15; text-wrap: balance; }
+  h1, h2, h3 { font-weight: 650; line-height: 1.12; letter-spacing: -.015em; text-wrap: balance; }
   p, li { text-wrap: pretty; }
   :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
-  ::selection { background: var(--accent-soft); color: var(--text); }
+  ::selection { background: var(--marker); color: var(--on-marker); }
   @media (width < 30rem) { body { font-size: 1rem; } }
 }
 
@@ -207,87 +217,78 @@
    4. Shared building blocks. Reuse these instead of restyling each instance.
    ------------------------------------------------------------------ */
 @layer components {
-  /* Mono label with a short accent rule. */
+  /* Short label above a page title, in sentence case. */
   .eyebrow {
-    display: inline-flex; align-items: center; gap: .65rem; margin-bottom: 1.25rem;
-    font-family: var(--font-mono); font-size: .8125rem; letter-spacing: .02em; color: var(--accent);
+    display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.25rem;
+    font-size: .9375rem; font-weight: 600; color: var(--accent);
   }
-  .eyebrow::before { content: ""; width: 1.75rem; height: 2px; border-radius: 2px; background: currentColor; }
 
-  /* Small uppercase section label with a diamond marker. */
-  .section-title {
-    display: inline-flex; align-items: center; align-self: start; gap: .6rem;
-    font-family: var(--font-mono); font-size: .8125rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--text);
+  /* Section heading: a small, firm label sitting on a heavy ink rule. */
+  .section-title { align-self: start; font-size: 1.0625rem; font-weight: 650; letter-spacing: -.005em; color: var(--text); }
+  .rule-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    border-top: 2px solid var(--text); padding-top: .9rem;
   }
-  .section-title::before { content: ""; flex: none; width: .5rem; height: .5rem; border-radius: 2px; background: var(--accent); transform: rotate(45deg); }
 
   .text-link {
-    color: inherit; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .22em;
-    text-decoration-color: color-mix(in srgb, var(--accent) 65%, transparent);
+    color: inherit; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: .22em;
+    text-decoration-color: color-mix(in srgb, var(--accent) 60%, transparent);
     transition: text-decoration-color .15s ease, color .15s ease;
   }
   .text-link:hover { color: var(--accent); text-decoration-color: currentColor; }
 
   .button {
     display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
-    min-height: 46px; padding: .65rem 1.25rem;
-    border: 1px solid var(--accent); border-radius: 999px;
+    min-height: 48px; padding: .7rem 1.35rem;
+    border: 1px solid var(--accent); border-radius: var(--radius-ui);
     background: var(--accent); color: var(--on-accent);
     font: 600 1rem/1.2 var(--font-sans); text-decoration: none; cursor: pointer;
-    box-shadow: 0 6px 18px -6px color-mix(in srgb, var(--accent) 70%, transparent);
-    transition: background-color .15s ease, border-color .15s ease, color .15s ease, transform .2s ease, box-shadow .2s ease;
+    transition: background-color .15s ease, border-color .15s ease, color .15s ease, box-shadow .2s ease;
   }
-  .button:not(.button-quiet)::after { content: "→"; transition: transform .2s ease; }
-  .button:hover {
-    background: var(--accent-strong); border-color: var(--accent-strong); color: var(--on-accent); transform: translateY(-2px);
-    box-shadow: 0 12px 26px -8px color-mix(in srgb, var(--accent) 75%, transparent);
-  }
-  .button:hover::after { transform: translateX(3px); }
+  .button:hover { background: var(--accent-strong); border-color: var(--accent-strong); color: var(--on-accent); }
+  /* Highlighter-yellow button for dark panels. */
+  .button-marker { background: var(--marker); border-color: var(--marker); color: var(--on-marker); }
+  .button-marker:hover { background: var(--on-ink-panel); border-color: var(--on-ink-panel); color: var(--on-marker); }
   .button-quiet {
     min-height: 40px; padding: .45rem .9rem; background: transparent; color: var(--text); border-color: var(--line);
-    border-radius: var(--radius-ui); font-size: .9375rem; font-weight: 500; box-shadow: none;
+    font-size: .9375rem; font-weight: 500;
   }
-  .button-quiet:hover { background: transparent; color: var(--accent); border-color: var(--accent); box-shadow: none; transform: none; }
+  .button-quiet:hover { background: transparent; color: var(--accent); border-color: var(--accent); }
 
   /* Long-form text: case studies and the About page. */
   .prose { max-width: var(--measure); }
   .prose > * + * { margin-top: 1.1em; }
-  .prose ul { padding-left: 1.15rem; list-style: disc; }
+  .prose ul { padding-left: 1.15rem; list-style: square; }
   .prose li + li { margin-top: .5em; }
   .prose li::marker { color: var(--accent); }
 
   .tag-list { display: flex; flex-wrap: wrap; gap: .5rem; }
-  .tag-list li { font-family: var(--font-mono); font-size: .8125rem; padding: .35rem .75rem; border-radius: 999px; background: var(--accent-2-soft); color: var(--accent-2); }
+  .tag-list li { font-size: .875rem; font-weight: 500; padding: .3rem .7rem; border-radius: 4px; background: var(--accent-2-soft); color: var(--text); }
 
-  /* Numbered steps (About › How I work). */
+  /* Numbered steps (About › How I work). A real sequence, so it earns its numbers. */
   .steps { counter-reset: step; }
   .steps li { counter-increment: step; }
   .steps li::before {
-    content: counter(step, decimal-leading-zero); grid-row: span 2;
-    display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%;
-    background: var(--accent-soft); color: var(--accent-strong); font-family: var(--font-mono); font-size: .8125rem; font-weight: 600;
+    content: counter(step); grid-row: span 2;
+    font-size: 2.5rem; font-weight: 700; line-height: .9; letter-spacing: -.04em; color: var(--accent);
+    font-variant-numeric: tabular-nums;
   }
 
-  /* Project images: framed, with a soft lift. */
-  .framed { border-radius: var(--radius-card); box-shadow: var(--elev-2); background: var(--surface); outline: 1px solid color-mix(in srgb, var(--text) 8%, transparent); outline-offset: -1px; }
+  /* Project images: a thin keyline and soft lift. */
+  .framed { border-radius: var(--radius-card); box-shadow: var(--elev-2); background: var(--surface); outline: 1px solid color-mix(in srgb, var(--text) 10%, transparent); outline-offset: -1px; }
 }
 
 /* ------------------------------------------------------------------
    5. Stateful pieces and animation
    ------------------------------------------------------------------ */
 @layer components {
-  .intro > * { animation: rise .7s cubic-bezier(.2, .7, .2, 1) both; }
-  .intro > :nth-child(2) { animation-delay: .08s; }
-  .intro > :nth-child(3) { animation-delay: .16s; }
+  /* The one page-load moment: the home hero sets itself line by line. */
+  .intro > * { animation: rise .8s cubic-bezier(.2, .7, .2, 1) both; }
+  .intro > :nth-child(2) { animation-delay: .07s; }
+  .intro > :nth-child(3) { animation-delay: .14s; }
+  .intro > :nth-child(4) { animation-delay: .21s; }
 
-  .cta-panel::before {
-    content: ""; position: absolute; inset: 0; z-index: -1;
-    background:
-      radial-gradient(30rem 22rem at 100% 0%, color-mix(in srgb, var(--accent) 55%, transparent), transparent 70%),
-      radial-gradient(26rem 20rem at 0% 120%, color-mix(in srgb, var(--accent-2) 45%, transparent), transparent 70%);
-  }
-  .cta-panel .button { box-shadow: 0 10px 30px -8px rgba(0, 0, 0, .5); }
-  .cta-panel :focus-visible { outline-color: var(--on-ink-panel); }
+  .cta-panel :focus-visible { outline-color: var(--marker); }
 
   .availability-dot { animation: availability-pulse 2.4s ease-out infinite; }
 
@@ -305,7 +306,7 @@
   @media (width < 30rem) { .enquiry[data-state="loading"], .enquiry[data-state="loaded"] { min-height: 30rem; } }
   .copy-status:empty { display: none; }
 
-  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
   @keyframes availability-pulse {
     0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 55%, transparent); }
     70%, 100% { box-shadow: 0 0 0 .5rem transparent; }

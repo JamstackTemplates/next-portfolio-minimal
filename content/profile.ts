@@ -21,7 +21,9 @@ export interface Profile {
   /** Short specialism shown under your name. */
   role: string;
   location: string;
-  /** One or two sentences: the first thing visitors read on the home page. */
+  /** A few words set very large at the top of the home page. Keep it under about 50 characters. */
+  headline: string;
+  /** One or two sentences under the headline; also the default site description. */
   introduction: string;
   /** A short paragraph for the home page "About" summary. */
   summary: string;
@@ -45,8 +47,9 @@ export const profile: Profile = {
   name: 'Jane Doe',
   role: 'Independent developer & interface designer',
   location: 'Anytown — working remotely',
+  headline: 'Calm, durable software for small organisations.',
   introduction:
-    'I design and build calm, durable software for small organisations: field tools, design systems and public information that has to work for everyone.',
+    'I’m an independent designer and developer. I make field tools, design systems and public information that has to work for everyone — on old phones, in poor signal and in a hurry.',
   summary:
     'I work across the whole path from a rough idea to a maintained product — research, interface design and front-end engineering — usually as the only designer-developer on a small team. I prefer plain tools, readable code and interfaces that still make sense in a hurry.',
   biography: [

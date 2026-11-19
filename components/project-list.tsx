@@ -10,35 +10,38 @@ type Props = {
   eagerFirst?: boolean;
 };
 
-/** Whole-entry project links: image, title, summary and discipline/year. Images alternate sides. */
+/**
+ * Whole-entry project links. The first project leads at full width with its text beside the image;
+ * the rest follow two to a row, like a magazine contents spread.
+ */
 export function ProjectList({ projects, headingLevel: Heading = 'h2', eagerFirst = false }: Props) {
   return (
-    <ul className="grid gap-[clamp(3rem,7vw,5.5rem)]">
-      {projects.map((project, index) => (
-        <li key={project.slug} className="group/entry">
-          <SiteLink href={projectRoute(project.slug)}
-            className="group grid items-center gap-x-[clamp(2rem,4vw,3.5rem)] gap-y-6 rounded-ui text-inherit no-underline md:grid-cols-[7fr_5fr] md:group-even/entry:grid-cols-[5fr_7fr]">
-            <div className="framed overflow-hidden transition duration-350 ease-[cubic-bezier(.2,.7,.2,1)] group-hover:-translate-y-1.5 group-hover:shadow-[var(--elev-2),0_30px_60px_-24px_color-mix(in_srgb,var(--accent)_45%,transparent)] md:group-even/entry:order-2">
-              <ProjectImage image={project.cover} eager={eagerFirst && index === 0}
-                className="aspect-[16/10] w-full object-cover transition-transform duration-600 group-hover:scale-[1.03]" />
-            </div>
-            <div>
-              <p className="font-mono text-[.8125rem] font-medium tracking-[.02em] text-accent-2">
-                <span>{project.discipline}</span>
-                <span aria-hidden="true"> · </span>
-                <span>{project.year}</span>
-              </p>
-              <Heading className="mt-2 mb-3 font-serif text-[clamp(1.6rem,3vw,2.25rem)] wrap-anywhere decoration-accent decoration-1 underline-offset-[.15em] group-hover:underline group-focus-visible:underline">
-                {project.title}
-              </Heading>
-              <p className="max-w-md text-muted">{project.summary}</p>
-              <span className="mt-6 inline-block rounded-full bg-accent-soft px-[.95rem] py-[.45rem] text-[.9375rem] font-semibold text-accent-strong transition duration-200 group-hover:translate-x-1 group-hover:bg-accent group-hover:text-on-accent" aria-hidden="true">
-                View case study →
-              </span>
-            </div>
-          </SiteLink>
-        </li>
-      ))}
+    <ul className="grid gap-x-[clamp(1.5rem,4vw,3rem)] gap-y-[clamp(3rem,7vw,5rem)] md:grid-cols-2">
+      {projects.map((project, index) => {
+        const lead = index === 0;
+        return (
+          <li key={project.slug} className={lead ? 'md:col-span-2' : undefined}>
+            <SiteLink href={projectRoute(project.slug)}
+              className={`group grid gap-x-[clamp(2rem,4vw,3.5rem)] gap-y-6 rounded-ui text-inherit no-underline ${lead ? 'lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] lg:items-end' : ''}`}>
+              <div className="framed overflow-hidden transition-shadow duration-300 group-hover:shadow-[var(--elev-2),0_0_0_2px_var(--accent)]">
+                <ProjectImage image={project.cover} eager={eagerFirst && lead}
+                  className="aspect-[16/10] w-full object-cover transition-transform duration-700 ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-[1.025]" />
+              </div>
+              <div className={lead ? 'lg:pb-2' : undefined}>
+                <p className="flex flex-wrap gap-x-3 text-[.9375rem] text-muted">
+                  <span className="tabular-nums font-semibold text-ink">{project.year}</span>
+                  <span>{project.discipline}</span>
+                </p>
+                <Heading className={`mt-2 mb-3 font-bold tracking-[-.025em] wrap-anywhere decoration-accent decoration-2 underline-offset-[.14em] group-hover:underline group-focus-visible:underline ${lead ? 'text-[clamp(2rem,4vw,3rem)] leading-[1.02]' : 'text-[clamp(1.6rem,2.6vw,2.1rem)] leading-[1.08]'}`}>
+                  {project.title}
+                </Heading>
+                <p className="max-w-md text-muted">{project.summary}</p>
+                <p className="mt-5 text-[.9375rem] font-semibold text-accent" aria-hidden="true">Read the case study</p>
+              </div>
+            </SiteLink>
+          </li>
+        );
+      })}
     </ul>
   );
 }

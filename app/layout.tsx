@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { Schibsted_Grotesk } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { ThemeProvider } from 'jamstacks';
 import { ThemeScript } from 'jamstacks/server';
@@ -7,6 +8,9 @@ import { SiteHeader } from '../components/site-header';
 import { profile } from '../content/profile';
 import { site } from '../lib/site';
 import './tailwind.input.css';
+
+// Downloaded at build time and served from this site: visitors never contact Google.
+const grotesk = Schibsted_Grotesk({ subsets: ['latin'], variable: '--font-grotesk', display: 'swap' });
 
 // Absolute URLs only when the deployed URL is known at build time. Never fall back to localhost.
 const socialImage = site.url ? [{ url: `${site.url}/og.png`, width: 1200, height: 630, alt: `${profile.name} — ${profile.role}` }] : undefined;
@@ -30,14 +34,14 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f6f3ee' },
-    { media: '(prefers-color-scheme: dark)', color: '#181715' },
+    { media: '(prefers-color-scheme: light)', color: '#f3f4f0' },
+    { media: '(prefers-color-scheme: dark)', color: '#0c1322' },
   ],
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={grotesk.variable} suppressHydrationWarning>
       <head><ThemeScript /></head>
       <body>
         <ThemeProvider>
